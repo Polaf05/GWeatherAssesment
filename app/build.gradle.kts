@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.services)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.kotlin.kapt)
@@ -44,6 +45,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -64,6 +66,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     //Hilt Dagger DI
     implementation(libs.hilt.android)
@@ -77,9 +80,28 @@ dependencies {
     //Kotlin Coroutines
     implementation(libs.kotlinx.coroutines.android)
 
-    //Security - Data Store and Encyption
+    //Security - Data Store and Encryption
     implementation(libs.androidx.security.crypto)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.tink.android)
+
+    //Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // JUnit
+    testImplementation(libs.junit)
+
+    // Coroutines test
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    // MockK for mocking
+    testImplementation(libs.mockk)
+
+    // AndroidX testing (for StateFlow, LiveData, etc.)
+    testImplementation(libs.androidx.core.testing)
 
 }
