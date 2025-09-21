@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "324813741660",
+    "project_id": "gweather-ae4c9",
+    "storage_bucket": "gweather-ae4c9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324813741660:android:41b49d3cf8a6014e435099",
+        "android_client_info": {
+          "package_name": "com.assesment.gweather"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxg-2Rdm4xKO-2Yd1DFHHVS2XpNh4Lbio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
