@@ -76,8 +76,13 @@ fun AppNavigation() {
 }
 
 @Composable
-fun GreetingPreview() {
-    GWeatherTheme {
-        Greeting("Android")
+fun HomeScreen(onLogout: () -> Unit) {
+    Column(
+        Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text("Home Screen")
+        Button(onClick = onLogout) { Text("Logout") }
     }
 }
