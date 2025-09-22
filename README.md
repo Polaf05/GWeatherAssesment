@@ -18,30 +18,49 @@ This is already configured to be a buildConfigField so as long as you put it in 
 
 ---
 
-#🚀 Features
+# 🚀 Features
 
 Firebase Authentication (Sign In & Registration)
+
 Fetch current weather by location
+
 Displays:
+
 City & Country
+
 Temperature (Celsius)
+
 Sunrise & Sunset time
+
 Weather icons (day/night handling)
+
 Saves weather history locally
+
 Offline support for past data
 
-#🛠️ Tech Stack
+# 🛠️ Tech Stack
 Kotlin
+
 Jetpack Compose
+
 Hilt (DI)
+
 Retrofit
+
 Coroutines + Flow
+
 Room Database
+
 Firebase Auth
 
-#🧪 Testing
+# 🧪 Testing
+
 Unit tests are included for:
+
 Repository
+
 ViewModels
+
 Flow testing with Turbine
+
 Mocking with MockK
