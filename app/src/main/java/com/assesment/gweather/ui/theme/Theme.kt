@@ -9,7 +9,9 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
+import java.util.Calendar
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -55,4 +57,14 @@ fun GWeatherTheme(
         typography = Typography,
         content = content
     )
+}
+
+fun getWeatherBackground(weather: String): Brush {
+    val isNight = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 18
+    return when {
+        weather.contains("rain", true) && isNight -> RainyNight
+        weather.contains("rain", true) -> RainyDay
+        isNight -> ClearNight
+        else -> ClearDay
+    }
 }
