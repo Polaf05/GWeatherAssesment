@@ -122,4 +122,6 @@ dependencies {
 
     implementation(libs.coil.compose)
 
+    testImplementation(libs.turbine)
+
 }
