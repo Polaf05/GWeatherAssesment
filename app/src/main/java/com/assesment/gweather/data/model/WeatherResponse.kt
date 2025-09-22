@@ -1,5 +1,6 @@
 package com.assesment.gweather.data.model
 
+import com.assesment.gweather.data.database.entity.WeatherEntity
 import com.google.gson.annotations.SerializedName
 
 data class WeatherResponse(
@@ -33,9 +34,29 @@ data class Main(
 )
 
 data class Weather(
+    @SerializedName("main")
+    val main: String,
     @SerializedName("description")
     val description: String,
 
     @SerializedName("icon")
     val icon: String
 )
+
+fun Weather.getIconUrl(): String =
+    "https://openweathermap.org/img/wn/${this.icon}@2x.png"
+
+fun WeatherResponse.toEntity(uid: String): WeatherEntity {
+    return WeatherEntity(
+        uid = uid,
+        city = city,
+        country = sys.country,
+        temperature = main.temp,
+        sunrise = sys.sunrise,
+        sunset = sys.sunset,
+        main = weather.firstOrNull()?.main.toString(),
+        description = weather.firstOrNull()?.description.toString(),
+        icon = weather.firstOrNull()?.icon ?: "unknown",
+        iconUrl = "https://openweathermap.org/img/wn/${weather.firstOrNull()?.icon}@2x.png"
+    )
+}
