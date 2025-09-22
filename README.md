@@ -13,6 +13,7 @@ Follow these steps to configure it securely:
 1. Open your project’s `local.properties` file (located at the root of your project).
 2. Add the following line
      **OPEN_WEATHER_API_KEY="b1777c931de8cad83e6420c855548818"**
+
 This is already configured to be a buildConfigField so as long as you put it in the **local.propeties** it will work.
 
 🚀 Features
