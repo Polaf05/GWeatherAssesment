@@ -7,19 +7,19 @@ class AuthRepositoryImpl @Inject constructor(
     private val remoteDataSource: AuthRemoteDataSource
 ) : AuthRepository {
 
-    override suspend fun login(email: String, password: String): Result<FirebaseUser> {
-        return remoteDataSource.login(email, password)
-    }
+    override suspend fun login(email: String, password: String): Result<FirebaseUser> =
+        remoteDataSource.login(email, password)
 
-    override suspend fun register(email: String, password: String): Result<FirebaseUser> {
-        return remoteDataSource.register(email, password)
-    }
 
-    override fun logout() {
-        remoteDataSource.logout()
-    }
+    override suspend fun register(email: String, password: String): Result<FirebaseUser> =
+        remoteDataSource.register(email, password)
 
-    override fun currentUser(): FirebaseUser? {
-        return remoteDataSource.currentUser()
-    }
+
+    override fun logout() = remoteDataSource.logout()
+
+
+    override fun currentUser(): FirebaseUser? = remoteDataSource.currentUser()
+
+
+    override fun isLoggedIn(): Boolean = remoteDataSource.isLoggedIn()
 }

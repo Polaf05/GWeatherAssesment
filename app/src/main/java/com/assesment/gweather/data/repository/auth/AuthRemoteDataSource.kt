@@ -34,4 +34,6 @@ class AuthRemoteDataSource @Inject constructor(
     fun logout() = firebaseAuth.signOut()
 
     fun currentUser(): FirebaseUser? = firebaseAuth.currentUser
+
+    fun isLoggedIn(): Boolean = firebaseAuth.currentUser != null
 }
