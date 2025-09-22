@@ -1,4 +1,4 @@
-# Weather App 🌦️
+## Weather App 🌦️
 
 An Android app that shows the current weather and weather history using the [OpenWeather API](https://openweathermap.org/api).  
 Built with **Kotlin**, **Jetpack Compose**, **Hilt**, **Coroutines**, and **Retrofit**.
@@ -16,50 +16,32 @@ Follow these steps to configure it securely:
 
 This is already configured to be a buildConfigField so as long as you put it in the **local.propeties** it will work.
 
-🚀 Features
+---
+
+#🚀 Features
 
 Firebase Authentication (Sign In & Registration)
-
 Fetch current weather by location
-
 Displays:
-
 City & Country
-
 Temperature (Celsius)
-
 Sunrise & Sunset time
-
 Weather icons (day/night handling)
-
 Saves weather history locally
-
 Offline support for past data
 
-🛠️ Tech Stack
-
+#🛠️ Tech Stack
 Kotlin
-
 Jetpack Compose
-
 Hilt (DI)
-
 Retrofit
-
 Coroutines + Flow
-
 Room Database
-
 Firebase Auth
 
-🧪 Testing
-
+#🧪 Testing
 Unit tests are included for:
-
 Repository
-
 ViewModels
-
 Flow testing with Turbine
-
 Mocking with MockK
