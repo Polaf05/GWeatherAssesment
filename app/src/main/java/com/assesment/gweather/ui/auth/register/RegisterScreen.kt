@@ -2,14 +2,16 @@ package com.assesment.gweather.ui.auth.register
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -40,42 +42,71 @@ fun RegisterScreen(
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var emailError by remember { mutableStateOf<String?>(null) }
+    var passwordError by remember { mutableStateOf<String?>(null) }
+
+    val isValid =
+        email.isNotBlank() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
+                password.length >= 6
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(24.dp),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Create Account", style = MaterialTheme.typography.headlineMedium)
 
-        Spacer(modifier = Modifier.height(16.dp))
-
         OutlinedTextField(
             value = email,
-            onValueChange = { email = it },
+            onValueChange = {
+                email = it
+                emailError = if (it.isBlank() || !android.util.Patterns.EMAIL_ADDRESS.matcher(it)
+                        .matches()
+                ) {
+                    "Invalid email"
+                } else null
+            },
             label = { Text("Email") },
             singleLine = true,
+            leadingIcon = { Icon(Icons.Default.Email, contentDescription = null) },
+            isError = emailError != null,
             modifier = Modifier.fillMaxWidth()
         )
-
-        Spacer(modifier = Modifier.height(12.dp))
+        emailError?.let {
+            Text(
+                it,
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
 
         OutlinedTextField(
             value = password,
-            onValueChange = { password = it },
+            onValueChange = {
+                password = it
+                passwordError =
+                    if (it.length < 6) "Password must be at least 6 characters" else null
+            },
             label = { Text("Password") },
             singleLine = true,
+            leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null) },
             visualTransformation = PasswordVisualTransformation(),
+            isError = passwordError != null,
             modifier = Modifier.fillMaxWidth()
         )
-
-        Spacer(modifier = Modifier.height(24.dp))
+        passwordError?.let {
+            Text(
+                it,
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
 
         Button(
             onClick = { viewModel.register(email, password) },
-            enabled = authState !is AuthUiState.Loading,
+            enabled = isValid && authState !is AuthUiState.Loading,
             modifier = Modifier.fillMaxWidth()
         ) {
             if (authState is AuthUiState.Loading) {
@@ -89,11 +120,13 @@ fun RegisterScreen(
         }
 
         if (authState is AuthUiState.Error) {
-            Spacer(modifier = Modifier.height(12.dp))
-            Text((authState as AuthUiState.Error).message, color = Color.Red)
+            Text(
+                (authState as AuthUiState.Error).message,
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(top = 8.dp)
+            )
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
 
         TextButton(onClick = onNavigateBack) {
             Text("Already have an account? Login")
