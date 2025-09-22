@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -20,10 +23,13 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+
         buildConfigField(
             "String",
             "OPEN_WEATHER_API_KEY",
-            "\"${project.findProperty("OPEN_WEATHER_API_KEY")}\""
+            "${properties.getProperty("OPEN_WEATHER_API_KEY")}"
         )
     }
 
@@ -59,6 +65,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.material.icons)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -103,5 +110,16 @@ dependencies {
 
     // AndroidX testing (for StateFlow, LiveData, etc.)
     testImplementation(libs.androidx.core.testing)
+
+    //Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation(libs.androidx.room.ktx)
+
+    implementation(libs.play.services.location)
+
+    implementation(libs.coil.compose)
 
 }
