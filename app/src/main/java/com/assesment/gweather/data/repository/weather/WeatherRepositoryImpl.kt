@@ -20,13 +20,16 @@ class WeatherRepositoryImpl @Inject constructor(
 
         val uid = authRepository.currentUser()?.uid.toString()
 
-        val response = remoteDataSource.getCurrentWeather(
-            coordinates.lat,
-            coordinates.lon
-        )
-
-        localDataSource.insertWeather(response.toEntity(uid))
-        return response
+        return try {
+            val response = remoteDataSource.getCurrentWeather(
+                coordinates.lat,
+                coordinates.lon
+            )
+            localDataSource.insertWeather(response.toEntity(uid))
+            response
+        } catch (e: Exception) {
+            throw IllegalStateException("Failed to fetch weather", e)
+        }
     }
 
     override fun getWeatherHistory(): Flow<List<WeatherEntity>> {
