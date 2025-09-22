@@ -37,15 +37,8 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.assesment.gweather.data.model.getIconUrl
 import com.assesment.gweather.ui.model.WeatherUiState
-import com.assesment.gweather.ui.theme.ClearDay
-import com.assesment.gweather.ui.theme.ClearNight
-import com.assesment.gweather.ui.theme.RainyDay
-import com.assesment.gweather.ui.theme.RainyNight
 import com.assesment.gweather.ui.theme.getWeatherBackground
 import com.assesment.gweather.ui.util.toHourMinute
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 @Composable
 fun CurrentWeatherScreen(viewModel: CurrentWeatherViewModel = hiltViewModel()) {
