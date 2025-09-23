@@ -87,11 +87,6 @@ dependencies {
     //Kotlin Coroutines
     implementation(libs.kotlinx.coroutines.android)
 
-    //Security - Data Store and Encryption
-    implementation(libs.androidx.security.crypto)
-    implementation(libs.androidx.datastore.preferences)
-    implementation(libs.tink.android)
-
     //Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
@@ -114,14 +109,15 @@ dependencies {
     //Room
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
-
-    // optional - Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
 
+    //FuseLocationService
     implementation(libs.play.services.location)
 
+    //Coil - Image
     implementation(libs.coil.compose)
 
+    //Turbine - Flow Testing
     testImplementation(libs.turbine)
 
 }
